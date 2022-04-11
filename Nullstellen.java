@@ -2,19 +2,21 @@ public class Nullstellen {
     public static void main(String[] args) {
         //Definition
         double a,b,c,ergebnis1,ergebnis2,rundung1,rundung2;
-        a = 1;
-        b = 0;
-        c = 0;
+        a = -1;
+        b = 2;
+        c = 3;
 
         //Mitternachtsformel
-        double sqrt = Math.sqrt(Math.pow(b, 2) - 4 * a + c);
-        ergebnis1 = (-b + sqrt);
-        ergebnis2 = (-b - sqrt);
+        double sqrt = Math.sqrt(Math.pow(b, 2) - 4 * a * c);
+        ergebnis1 = (-b + sqrt) / 2*a;
+        ergebnis2 = (-b - sqrt) / 2*a;
 
+        //Rundung
         rundung1 = Math.round(ergebnis1*100.0)/100.0;
         rundung2 = Math.round(ergebnis2*100.0)/100.0;
 
-        if (ergebnis1 == Double.NaN && ergebnis2 == Double.NaN) {
+        //Ausgabe
+        if (Double.isNaN(ergebnis1) && Double.isNaN(ergebnis2)) {
             System.out.println("Es gibt keine reellen Nullstellen.");
         } else if (rundung1 == rundung2) {
             System.out.println("x1 = " + rundung1);
