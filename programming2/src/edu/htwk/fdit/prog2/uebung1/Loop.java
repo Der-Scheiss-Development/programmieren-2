@@ -1,3 +1,5 @@
+package edu.htwk.fdit.prog2.uebung1;
+
 import java.util.Scanner;
 
 public class Loop {

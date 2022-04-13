@@ -1,3 +1,5 @@
+package edu.htwk.fdit.prog2.uebung1;
+
 public class Cramer {
     public static void main(String[] args) {
         //Definition
