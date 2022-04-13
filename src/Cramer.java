@@ -1,3 +1,5 @@
+package src;
+
 public class Cramer {
     public static void main(String[] args) {
         //Definition
