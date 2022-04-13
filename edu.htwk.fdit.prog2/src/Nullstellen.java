@@ -1,5 +1,3 @@
-package src;
-
 public class Nullstellen {
     public static void main(String[] args) {
         //Definition
@@ -19,14 +17,14 @@ public class Nullstellen {
 
         //Ausgabe
         if (Double.isNaN(ergebnis1) && Double.isNaN(ergebnis2)) {
-            System.out.println("Es gibt keine reellen src.Nullstellen.");
+            System.out.println("Es gibt keine reellen Nullstellen.");
         } else if (rundung1 == rundung2) {
             System.out.println("x1 = " + rundung1);
         } else if (ergebnis1 != ergebnis2) {
             System.out.println("x1 = " + rundung1 + ", " + "x2 = " + rundung2);
         } else {
             System.out.println("How did you get here?");
-            System.out.println("Die Funktion hat immer noch keine src.Nullstellen.");
+            System.out.println("Die Funktion hat immer noch keine Nullstellen.");
         }
     }
 }
