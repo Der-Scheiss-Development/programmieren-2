@@ -91,12 +91,16 @@ public class List {
     // returns first index where the object equals o
     public int findFirst(Object o) {
         Element current = head;
-        int i = 0;
-        while (current != o && current.next != null) {
-            current = current.next;
-            ++i;
+        if (current != null) {
+            int i = 0;
+            while (current != o && current.next != null) {
+                current = current.next;
+                ++i;
+            }
+            return i;
+        } else {
+            return -1;
         }
-        return i;
     }
 
     // Magic to convert HashCode to a String
@@ -199,6 +203,7 @@ public class List {
         System.out.println(list.get(1));
 
         System.out.println(new List(1,2,3,4,5));
+
 
     }
 }
