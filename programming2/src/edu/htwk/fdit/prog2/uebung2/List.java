@@ -15,11 +15,23 @@ public class List {
 
     }
 
+    // constructs list from varargs
     public List(Object ... objs) {
+        Element current = head;
+            for (Object o: objs) {
+                System.out.println("Creating new list and appending " + o + " to list");
+                if (current == null) {
+                    this.head = new Element(o);
+                } else {
+                    while (current.next != null) {
+                        current = current.next;
+                    }
+                        current.next = new Element(o);
+                }
+            }
+    }
 
-            //?
-    } // constructs list from varargs
-
+    // how many items in the list
     public int size() {
         Element current = head;
         int i = 0;
@@ -28,8 +40,9 @@ public class List {
             ++i;
         }
         return i;
-    } // how many items in the list
+    }
 
+    // returns element at index
     public Object get(int index) {
         if (index > size()) {
             System.out.println("An element at the index you've given does not exist.");
@@ -43,9 +56,9 @@ public class List {
             }
             return current;
         }
+    }
 
-    } // returns element at index
-
+    // inserts Object o at index
     public void insert(Object o, int index) {
         // Create a new node
         Element newNode = new Element(o);
@@ -73,8 +86,9 @@ public class List {
 
         // & new node to point to current node
         newNode.next = current;
-    } // inserts Object o at index
+    }
 
+    // returns first index where the object equals o
     public int findFirst(Object o) {
         Element current = head;
         int i = 0;
@@ -83,23 +97,25 @@ public class List {
             ++i;
         }
         return i;
-    } // returns first index where the object equals o
+    }
 
-    public String toString() {
-        String hash = Integer.toString(System.identityHashCode(this.data));
+    // Magic to convert HashCode to a String
+    public String toString() {                                          //Anm.: macht nicht das, was es machen soll :/
+        String hash = String.valueOf(System.identityHashCode(data));
         String className = this.data.getClass().getSimpleName();
         return className + "(" + data + ")@" + hash;
-    } // renders list into string bounded by [] and seperated by ,
+    }
 
+    // gives last element of the list
     public Object last() {
         Element current = this.head;
         while (current.next != null) {
             current = current.next;
-
         }
         return current;
-    } // gives last element of the list
+    }
 
+    // appends element at the end of list
     public void append(Object o) {
         System.out.println("Appending element " + o + " to list");
         Element current = this.head;
@@ -111,10 +127,10 @@ public class List {
         }
         current.next = new Element(o);
         }
-    } // appends element at the end of list
+    }
 
+    // deletes element at index, returns if out of range
     public void delete(int index) {
-
         if (index > size()) {
             System.out.println("The list does not have an element at this position!");
         } else {
@@ -147,8 +163,9 @@ public class List {
 
             temp.next = next; // Unlink the deleted node from list
         }
-    } // deletes element at index, returns if out of range
+    }
 
+    //print list
     public void print() {
         Element tnode = head;
         while (tnode != null) {
@@ -158,23 +175,30 @@ public class List {
         System.out.println();
     }
 
+    //main method
     public static void main(String[] args) {
         List list = new List();
         System.out.println("Created a singly linked list");
         list.append(100);
         list.append(200);
         list.print();
+
         System.out.println(list.size()); //prints size of list, counted from zero
         //list.delete(3);
         list.print();
+
         list.insert(111,1); // DOES NOT COUNT FROM ZERO!
         list.print();
+
         System.out.println(list.size()); //prints size of list, counted from zero
+
         list.delete(1); //delete at index, counts from zero :)
         list.print();
 
         System.out.println(list.findFirst(200));
         System.out.println(list.get(1));
-    }
 
+        System.out.println(new List(1,2,3,4,5));
+
+    }
 }
