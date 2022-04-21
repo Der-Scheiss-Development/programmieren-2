@@ -5,14 +5,18 @@ public class Person {
     String nachname, vorname;
     Integer geburtsTag, geburtsMonat, geburtsJahr;
     LocalDate vgeburtstag;
+    Address address;
+    BankAccount bankAccount;
 
-    public Person(String nachname, String vorname, Integer geburtsTag, Integer geburtsMonat, Integer geburtsJahr) {
+    public Person(String nachname, String vorname, Integer geburtsTag, Integer geburtsMonat, Integer geburtsJahr, Address address, BankAccount bankAccount) {
         this.nachname = nachname;
         this.vorname = vorname;
         this.geburtsJahr = geburtsJahr;
         this.geburtsMonat = geburtsMonat;
         this.geburtsTag = geburtsTag;
         this.vgeburtstag = LocalDate.of(geburtsJahr,geburtsMonat,geburtsTag);
+        this.address = address;
+        this.bankAccount = bankAccount;
     }
 
     public void setNachname(String nachname) {
