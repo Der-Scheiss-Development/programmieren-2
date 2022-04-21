@@ -11,4 +11,32 @@ public class Address {
         this.land = land;
     }
 
+    // GET VALUES
+
+    public String getAddress(String strasse, String hausnummer, String plz, String ort, String land) {
+        return ("Strasse: " + strasse + " " + hausnummer + ", PLZ: " + plz + ", Ort: " + ort + ", Land: " + land);
+    }
+
+    // SET VALUES
+
+    public void setStrasse(String strasse) {
+        this.strasse = strasse;
+    }
+
+    public void setHausnummer(String hausnummer) {
+        this.hausnummer = hausnummer;
+    }
+
+    public void setPlz(String plz) {
+        this.plz = plz;
+    }
+
+    public void setOrt(String ort) {
+        this.ort = ort;
+    }
+
+    public void setLand(String land) {
+        this.land = land;
+    }
+
 }

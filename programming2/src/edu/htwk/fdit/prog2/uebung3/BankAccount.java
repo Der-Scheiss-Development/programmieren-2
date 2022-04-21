@@ -9,4 +9,33 @@ public class BankAccount {
         this.kto = kto;
         this.iban = blz + kto;
     }
+
+    // GET VALUES
+
+    public String getBic() {
+        return bic;
+    }
+
+    public String getBlz() {
+        return blz;
+    }
+
+    public String getKto() {
+        return kto;
+    }
+
+    // SET VALUES
+
+    public void setBic(String bic) {
+        this.bic = bic;
+    }
+
+    public void setBlz(String blz) {
+        this.blz = blz;
+    }
+
+    public void setKto(String kto) {
+        this.kto = kto;
+    }
+
 }
