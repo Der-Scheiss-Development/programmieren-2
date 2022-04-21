@@ -24,6 +24,10 @@ public class BankAccount {
         return kto;
     }
 
+    public String getIban() {
+        return iban;
+    }
+
     // SET VALUES
 
     public void setBic(String bic) {
