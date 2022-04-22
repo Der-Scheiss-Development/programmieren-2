@@ -1,27 +1,33 @@
 package edu.htwk.fdit.prog2.uebung3;
 
-import java.time.LocalDate;
+/**
+ * In der Main.java wird die Erstellung der einzelnen Objekte geregelt. <br>
+ * Als Beispiel wird hier der liebe Heinz, mit seiner Adresse und seinem Bankkonto erstellt und in Verbindung gebracht.
+ */
 
 public class Main {
-    Address address;
-    BankAccount bankAccount;
-    Person person;
+    /**
+     * Person person;
+     * Address address;
+     * BankAccount bankAccount;
+    **/
 
     public static void main(String[] args) {
-        LocalDate test = LocalDate.of(1904,12,12);
-        Address Atest = new Address("Teststraße", "12", "12345", "Testort", "Testland");
-        BankAccount Btest = new BankAccount("12384", "12345", "KTO123");
-        Person Heinz = new Person("Test","Vorname",19,12,1999, Atest, Btest);
+        Address Address_1 = new Address("Teststraße", "12", "12345", "Testort", "Testland");
+        BankAccount BankAccount_1 = new BankAccount("12384", "12345", "KTO123");
+        Person Heinz = new Person("Test","Vorname",19,12,1999, Address_1, BankAccount_1);
         System.out.println(Heinz.getGeburtstag());
 
 
-        System.out.println(Atest.getAddress(Atest.strasse, Atest.hausnummer, Atest.plz, Atest.ort, Atest.land));
+        System.out.println(Address_1.getAddress(Address_1.strasse, Address_1.hausnummer, Address_1.plz, Address_1.ort, Address_1.land));
 
-
-        System.out.println(Btest.getKto() + " " + Btest.getBlz());
-        System.out.println(Btest.iban);
+        System.out.println(BankAccount_1.getKto() + " " + BankAccount_1.getBlz());
+        System.out.println(BankAccount_1.iban);
         System.out.println();
         System.out.println(Heinz.bankAccount.getIban());
+        Heinz.bankAccount.setKto("1234456");
+        Heinz.setNachname("Hallo");
+        Heinz.getNachname();
 
     }
 }
