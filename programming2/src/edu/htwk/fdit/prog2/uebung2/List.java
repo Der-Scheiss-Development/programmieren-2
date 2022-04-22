@@ -1,6 +1,6 @@
 package edu.htwk.fdit.prog2.uebung2;
 
-public class List {
+public class List extends Object {
     public Element head = null;
     private Object data;
 
@@ -8,6 +8,7 @@ public class List {
 
         private Object data;
         private Element next;
+
         public Element(Object data) {
             this.data = data;
             this.next = null;
@@ -104,8 +105,9 @@ public class List {
     }
 
     // Magic to convert HashCode to a String
+    @Override
     public String toString() {                                          //Anm.: macht nicht das, was es machen soll :/
-        String hash = String.valueOf(System.identityHashCode(data));
+        String hash = Integer.toString(System.identityHashCode(data));
         String className = this.data.getClass().getSimpleName();
         return className + "(" + data + ")@" + hash;
     }
@@ -203,7 +205,6 @@ public class List {
         System.out.println(list.get(1));
 
         System.out.println(new List(1,2,3,4,5));
-
 
     }
 }
