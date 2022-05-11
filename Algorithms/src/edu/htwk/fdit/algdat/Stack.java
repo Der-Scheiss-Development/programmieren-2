@@ -11,6 +11,7 @@ public class Stack {
          V
          obj
     */
+
     private Element head;
 
     private class Element {
@@ -21,6 +22,7 @@ public class Stack {
         public Element(Object o) {
             this.value = o;
         }
+
     }
 
     public Stack() {
