@@ -1,12 +1,16 @@
 package edu.htwk.fdit.prog2.uebung3;
 import java.time.*;
 
-public class Person {
-    String nachname, vorname;
-    Integer geburtsTag, geburtsMonat, geburtsJahr;
-    LocalDate vgeburtstag;
-    Address address;
-    BankAccount bankAccount;
+public class Person extends Object {
+
+    private String nachname;
+    private String vorname;
+    private Integer geburtsTag;
+    private Integer geburtsMonat;
+    private Integer geburtsJahr;
+    private LocalDate vgeburtstag;
+    private Address address;
+    private BankAccount bankAccount;
 
     public Person(String nachname, String vorname, Integer geburtsTag, Integer geburtsMonat, Integer geburtsJahr, Address address, BankAccount bankAccount) {
         this.nachname = nachname;
@@ -48,5 +52,28 @@ public class Person {
 
     public LocalDate getGeburtstag() {
         return vgeburtstag;
+    }
+
+    @Override
+    public String toString() {
+        return this.nachname + " *(" + this.geburtsTag + "." + this.geburtsMonat + "." + this.geburtsJahr + ")";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(! (obj instanceof Person)) {
+            return false;
+        }
+        if(obj == null) {
+            return false;
+        }
+
+        if(this == obj) {
+            return true;
+        }
+
+        Person other = (Person) obj;
+
+        return this.nachname.equals(other.nachname) && this.geburtsTag == other.geburtsTag;
     }
 }

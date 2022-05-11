@@ -1,7 +1,11 @@
 package edu.htwk.fdit.prog2.uebung3;
 
 public class Address {
-    String strasse, hausnummer, plz, ort, land;
+    String strasse;
+    String hausnummer;
+    String plz;
+    String ort;
+    String land;
 
     public Address(String strasse, String hausnummer, String plz, String ort, String land) {
         this.strasse = strasse;

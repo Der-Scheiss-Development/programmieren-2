@@ -1,7 +1,10 @@
 package edu.htwk.fdit.prog2.uebung3;
 
 public class BankAccount {
-    String iban, bic, blz, kto;
+    private String iban;
+    private String bic;
+    private String blz;
+    private String kto;
 
     public BankAccount(String bic, String blz, String kto) {
         this.bic = bic;
@@ -11,7 +14,6 @@ public class BankAccount {
     }
 
     // GET VALUES
-
     public String getBic() {
         return bic;
     }
