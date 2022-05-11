@@ -2,6 +2,7 @@ package edu.htwk.fdit.prog2.uebung1;
 
 public class Cramer {
     public static void main(String[] args) {
+        /*
         //Definition
         double a, b, c, d, e, f, x, y;
         a = 3;
@@ -18,5 +19,7 @@ public class Cramer {
         //Ausgabe
         System.out.println("x: " + x);
         System.out.println("y: " + y);
+
+         */
     }
 }

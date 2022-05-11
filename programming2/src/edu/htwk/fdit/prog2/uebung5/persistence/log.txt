@@ -1,0 +1,15 @@
+{MaxHp=43;Damage=20;Element=AIR;Level=CHAMPION;Name=Fenriswolf}
+{MaxHp=88;Damage=12;Element=PIZZA;Level=CHAMPION;Name=Calzone}
+{MaxHp=43;Damage=14;Element=EARTH;Level=CHAMPION;Name=Draugr}
+{MaxHp=19;Damage=11;Element=EARTH;Level=VETERAN;Name=Golem}
+{MaxHp=63;@ist1kSjFcb0bQswDUpay@Damage=18;@hC7YyXmp7tNwX6uzBq@Element=WATER;Level=MOOK;Name=Wasserelementar@5Ua884@}
+{@kHcZvaD@MaxHp=83;Damage=14;@QxswYUfmSAYCVcx4a5z@Element=WATER;Level=MOOK;Name=Koy-Karpfen}
+{@pJUaysUn1U@MaxHp=78;@WEYybIu53GaS1rFD602@Damage=10;Element=EARTH;Level=CHAMPION;Name=Erdelementar}
+{MaxHp=28;Damage=13;Element=@BmfTlLKnuFkV9po3e@FIRE;Level=MOOK;Name=Balrog}
+{MaxHp=100;@nhmVktcsx1GAUFNTp4@Damage=11;Element=EARTH;Level=@9gQXNEYsvQ8xgxVGfQg@VETERAN;Name=Golem}
+{@x6f6mZJDxfA2dbL5@MaxHp=88;@tRiOx@Damage=@5b6EeSGqSPS@16;@WWU7hKhyu@Element=@WcRno@AIR;@DS70GgGIits@Level=MOOK;Name=Rok@JCveWFPgSVyEHSR8Pj@}
+{MaxHp=@aSGo7JiCrXMPoqjUz@77;Damage=@7BxtNS9J6@20;@5DpQRAnJ@Element=@EiveLUqq@FIRE;@Ces4x0G4Gi9OVYZzflR3@Level=VETERAN;Name=@oGHm3XLvIT6q6Di27@Feuerelementar@m5xkcGRdbY@}
+{@dL1FCSE2R@MaxHp=104;Damage=@CgpmYswS6ymTaL7w2T7@14;@pVIDj@Element=@9Cv6g9LFvLVl@WATER;@z95qJRG@Level=MOOK;Name=Tsunami@SjeapCc0hVFporI8@}
+{MaxHp=@g0OwFSEq1CcyC@51;@K7jKM6mnfVJNwlP@Damage=@O2gtRx@18;Element=FIRE;Level=@AJ6tN7JQI9umYt5@VETERAN;Name=@agZ277rwpYwfxLp8B@Balrog@3cyFEqwX4BU9sA8izal@}
+{MaxHp=28;Damage=10;@K2PXs09Fuw1O@Element=@8t8RENKqGfCwOjti@EARTH;@48Gic5x4x86@Level=@xn2jPfgcOFU@CHAMPION;Name=Golem}
+{MaxHp=86;@Xzfit8CGAF5e9TW0J6@Damage=@t4sJx6td@10;Element=@nEImcLAEq89xN6jD@AIR;@7AwxajpTu@Level=ELITE;Name=@5gnwrAVT2@Rok@I69aX4N86fd0l7o0R7@}
