@@ -14,7 +14,7 @@ enum Symbol {
 
   String symbol;
 
-  Symbol(String symbol) {
+  Symbol(String symbol) { //konstruktor
     this.symbol = symbol;
   }
 
@@ -25,7 +25,7 @@ enum Symbol {
 }
 
 enum Color {
-  CLUB   ("♧"),
+  CLUB   ("♧"), //tolle UTF-8 Zeichen
   SPADE  ("♤"),
   HEART  ("♡"),
   DIAMOND("♢");
@@ -79,7 +79,7 @@ enum Card {
   final Color  color;
   final Symbol symbol;
 
-  Card(Color color, Symbol symbol) {
+  Card(Color color, Symbol symbol) { //bisschen Struktur und so
     this.color = color;
     this.symbol = symbol;
   }
@@ -143,6 +143,20 @@ class MauMau implements MauMauable {
   }
 
 }
+
+class MauMauExt extends MauMau {
+  /* // tried bube auf bube darf nicht gelegt werden
+  @Override
+  public boolean isAllowed(Card c) {
+    if (top.symbol != Symbol.JACK) {
+      if (c.symbol != Symbol.JACK) {
+        return top.symbol == c.symbol || top.color == c.color;
+      }
+    }
+    return false;
+  }     */
+}
+
 
 class Game {
   MauMauable state;
@@ -250,12 +264,43 @@ class Player {
   }
 }
 
+class ComputerPlayer extends Player {
+  Random rng;
+
+  ComputerPlayer(String name) {
+    super(name);
+    rng = new Random();
+  }
+
+  @Override
+  Move ask(MauMauable state) {
+    System.out.println(state);
+    System.out.println("you have the cards: " + hand);
+    Card proposal = null;
+    for (Card c : hand) {
+      if (state.isAllowed(c)) {
+        proposal = c;
+        break;
+      }
+    }
+    if (proposal != null && proposal.symbol == Symbol.JACK) {
+      return new Move(proposal, chooseColor());
+    }
+    return new Move(proposal, null);
+  }
+
+  @Override
+  Color chooseColor() {
+    return Color.values()[rng.nextInt(Color.values().length)];
+  }
+}
+
 public class Cards {
   public static void main(String[] args) {
     Game g = new Game(new Player[] {
       new Player("Human1"),
-      new ComputerPlayer("Computer1")},
-      new MauMauExt());
+      new ComputerPlayer("Computer1")}, //doesn't exist atm
+      new MauMau()); //doesn't exist atm
     g.start();
     System.out.println(g.winner.getName() + " has won.");
   }
