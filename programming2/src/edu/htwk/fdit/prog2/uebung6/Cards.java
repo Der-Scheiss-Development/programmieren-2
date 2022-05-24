@@ -1,5 +1,3 @@
-package edu.htwk.fdit.prog2.uebung6;
-
 import java.util.*;
 
 enum Symbol {
@@ -14,7 +12,7 @@ enum Symbol {
 
   String symbol;
 
-  Symbol(String symbol) { //konstruktor
+  Symbol(String symbol) { //constructor
     this.symbol = symbol;
   }
 
@@ -25,7 +23,7 @@ enum Symbol {
 }
 
 enum Color {
-  CLUB   ("♧"), //tolle UTF-8 Zeichen
+  CLUB   ("♧"), //nice UTF-8 symbols
   SPADE  ("♤"),
   HEART  ("♡"),
   DIAMOND("♢");
@@ -79,7 +77,7 @@ enum Card {
   final Color  color;
   final Symbol symbol;
 
-  Card(Color color, Symbol symbol) { //bisschen Struktur und so
+  Card(Color color, Symbol symbol) { //little bit of structure etc
     this.color = color;
     this.symbol = symbol;
   }
@@ -116,7 +114,7 @@ class MauMau implements MauMauable {
   @Override
   public boolean isAllowed(Card c) {
     if(top.symbol == c.symbol || top.color == c.color) {
-       return true;
+      return true;
     }
     return false;
   }
@@ -127,7 +125,7 @@ class MauMau implements MauMauable {
       throw new RuntimeException("Player unallowed card, nothing is done.");
     }
     putOnTop(m.card());
-    System.out.println("played: " + m.card());
+    //System.out.println("played: " + m.card());
   }
 
   @Override
@@ -145,18 +143,100 @@ class MauMau implements MauMauable {
 }
 
 class MauMauExt extends MauMau {
-  /* // tried bube auf bube darf nicht gelegt werden
+  private enum State {
+    NORMAL,
+    DRAW,
+    WISH,
+    SKIP,
+  }
+
+  State state;
+  Color wished_color;
+  int num_draw;
+
+  MauMauExt() {
+    state = State.NORMAL;
+    wished_color = null;
+    num_draw = 0;
+  }
+
+  @Override
+  public int getPenalty() {
+    int draws = switch( state ) {
+      case NORMAL, WISH -> 1;
+      case DRAW -> num_draw;
+      default -> 0; // in case of SKIP
+    };
+    num_draw = 0;
+    if( state != State.WISH ) {
+      state = State.NORMAL;
+    }
+    return draws;
+  }
+
   @Override
   public boolean isAllowed(Card c) {
-    if (top.symbol != Symbol.JACK) {
-      if (c.symbol != Symbol.JACK) {
-        return top.symbol == c.symbol || top.color == c.color;
+    switch( state ) {
+      case NORMAL -> {
+        if( super.isAllowed(c) || c.symbol == Symbol.JACK ) {
+          return true;
+        }
       }
+      case WISH -> {
+        if( c.color == wished_color  && c.symbol != Symbol.JACK ) {
+          return true;
+        }
+      }
+      case DRAW -> {
+        if( c.symbol == Symbol.SEVEN ) {
+          return true;
+        }
+      }
+      case SKIP -> {
+        if( c.symbol == Symbol.ACE ) {
+          return true;
+        }
+      }
+      default -> throw new RuntimeException("No such state");
     }
     return false;
-  }     */
-}
+  }
 
+  @Override
+  public void apply(Move m) {
+    super.apply(m);
+    Card c = m.card();
+    if( state == State.WISH ) {
+      assert c.symbol != Symbol.JACK;
+      state = State.NORMAL;
+      wished_color = null;
+    }
+    switch( c.symbol ) {
+      case JACK -> {
+        wished_color = m.color();
+        state = State.WISH;
+      }
+      case SEVEN -> {
+        state = State.DRAW;
+        num_draw += 2;
+      }
+      case ACE -> {
+        state = State.SKIP;
+      }
+      default -> {
+        assert state == State.NORMAL;
+      }
+    }
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder statusLine = new StringBuilder(super.toString());
+    statusLine.append(" state: " + state);
+    statusLine.append("(draws=" + num_draw + ", wish=" + wished_color + ")");
+    return statusLine.toString();
+  }
+}
 
 class Game {
   MauMauable state;
@@ -180,14 +260,14 @@ class Game {
   }
 
   void start() {
-    System.out.println("New game starts:");
+    //System.out.println("New game starts:");
     while( winner == null ) {
       for( Player p : players ) {
-        System.out.println(p.getName() + " make your choice: ");
+        //System.out.println(p.getName() + " make your choice: ");
         Move m = p.ask(state);
         if( m.card() == null ) {
           int draws = state.getPenalty();
-          System.out.println(p.getName() + " draws " + draws);
+          //System.out.println(p.getName() + " draws " + draws);
           for(int i = 0; i < draws; ++i) {
             if( !talon.isEmpty() ) {
               p.add(talon.pop());
@@ -230,9 +310,9 @@ class Player {
   Move ask(MauMauable state) {
     int card_num;
     do {
-      System.out.println(state);
-      System.out.println("you have the cards: " + hand);
-      System.out.println("make your choice: 0.." + (hand.size() - 1) + " (-1 for draw): ");
+      //System.out.println(state);
+      //System.out.println("you have the cards: " + hand);
+      //System.out.println("make your choice: 0.." + (hand.size() - 1) + " (-1 for draw): ");
       Scanner in = new Scanner(System.in);
       card_num = in.nextInt();
       if( card_num <= -1 || card_num >= hand.size() ) {
@@ -256,7 +336,7 @@ class Player {
   Color chooseColor() {
     int color_num;
     do {
-      System.out.println("choose a color: 0.." + (Color.values().length - 1) + " -> ♧, ♤, ♡, ♢ : ");
+      //System.out.println("choose a color: 0.." + (Color.values().length - 1) + " -> ♧, ♤, ♡, ♢ : ");
       Scanner in = new Scanner(System.in);
       color_num = in.nextInt();
     } while( color_num < 0 || color_num >= Color.values().length );
@@ -274,16 +354,16 @@ class ComputerPlayer extends Player {
 
   @Override
   Move ask(MauMauable state) {
-    System.out.println(state);
-    System.out.println("you have the cards: " + hand);
+    //System.out.println(state);
+    //System.out.println("you have the cards: " + hand);
     Card proposal = null;
-    for (Card c : hand) {
-      if (state.isAllowed(c)) {
+    for( Card c : hand ) {
+      if( state.isAllowed(c) ) {
         proposal = c;
         break;
       }
     }
-    if (proposal != null && proposal.symbol == Symbol.JACK) {
+    if( proposal != null && proposal.symbol == Symbol.JACK ) {
       return new Move(proposal, chooseColor());
     }
     return new Move(proposal, null);
@@ -295,12 +375,95 @@ class ComputerPlayer extends Player {
   }
 }
 
+class ComputerPlayerBetter extends ComputerPlayer {
+  ComputerPlayerBetter(String name) {
+    super(name);
+  }
+
+  Card playableSevens(MauMauable state) {
+    int num_sevens = 0;
+    boolean playable_seven = false;
+    for( Card c : hand ) {
+      if( c.symbol == Symbol.SEVEN ) {
+        num_sevens = +1;
+      }
+    }
+    for( Card c : hand ) {
+      if( c.symbol == Symbol.SEVEN && state.isAllowed(c) ) {
+        playable_seven = true;
+        if( num_sevens > 1 ) {
+          return c;
+        }
+      }
+    }
+    return null;
+  }
+
+  Card bestPlayableCard(MauMauable state) {
+    // A custom comparator to sort playable cards with priority
+    Comparator<Card> cardSymbolComparator = new Comparator<Card>() {
+      @Override
+      public int compare(final Card c1, final Card c2) {
+        EnumSet<Symbol> SA = EnumSet.of(Symbol.SEVEN, Symbol.ACE);
+        EnumSet<Symbol> SJA = EnumSet.of(Symbol.SEVEN, Symbol.JACK, Symbol.ACE);
+        boolean c1_is_special = SJA.contains(c1.symbol);
+        boolean c2_is_special = SJA.contains(c2.symbol);
+        boolean c1_is_SorA = SA.contains(c1.symbol);
+        boolean c2_is_SorA = SA.contains(c2.symbol);
+        if( c1.symbol == c2.symbol ||
+                c1_is_SorA && c2_is_SorA ||
+                !c1_is_special && !c2_is_special ) {
+          return 0;
+        } else if( c1.symbol == Symbol.JACK && c2.symbol != Symbol.JACK ||
+                c1_is_special && !c2_is_special ) {
+          return 1;
+        }
+        return -1;
+      }
+    };
+    PriorityQueue<Card> pc = new PriorityQueue<>(cardSymbolComparator);
+    for( Card c : hand ) {
+      if( state.isAllowed(c) ) {
+        pc.add(c);
+      }
+    }
+    return pc.size() > 0 ? pc.peek() : null;
+  }
+
+  @Override
+  Move ask(MauMauable state) {
+    //System.out.println(state);
+    //System.out.println("you have the cards: " + hand);
+    Card proposal = null;
+    // do we have a playable 7
+
+    if( (proposal = playableSevens(state)) != null ) {
+      return new Move(proposal, null);
+    }
+    proposal = bestPlayableCard(state);
+    if( proposal != null && proposal.symbol == Symbol.JACK ) {
+      return new Move(proposal, chooseColor());
+    }
+    return new Move(proposal, null);
+  }
+
+  @Override
+  Color chooseColor() {
+    Set<Color> colors_avail = new HashSet<>();
+    for( var c : hand ) {
+      colors_avail.add(c.color);
+    }
+    return Color.values()[rng.nextInt(Color.values().length)];
+  }
+}
+
 public class Cards {
   public static void main(String[] args) {
     Game g = new Game(new Player[] {
-      new Player("Human1"),
-      new ComputerPlayer("Computer1")}, //doesn't exist atm
-      new MauMau()); //doesn't exist atm
+            new ComputerPlayerBetter("Computer1"),
+            new ComputerPlayer("Computer2"),
+            new ComputerPlayer("Computer3")},
+            new MauMauExt());
     g.start();
     System.out.println(g.winner.getName() + " has won.");
   }
